@@ -1,33 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-class Job {
-    int id;
-    int processingTime;
-    Integer priority = null;      // Nullable priority, used for Task 2
-    Integer arrivalTime = null;   // Nullable arrival time, used for Task 3
-
-    // Constructor for Task 1
-    public Job(int id, int processingTime) {
-        this.id = id;
-        this.processingTime = processingTime;
-    }
-
-    // Constructor for Task 2 with priority
-    public Job(int id, int processingTime, Integer priority) {
-        this.id = id;
-        this.processingTime = processingTime;
-        this.priority = priority;
-    }
-
-    // Constructor for Task 3 with arrivalTime
-    public Job(int id, int processingTime, int arrivalTime) {
-        this.id = id;
-        this.processingTime = processingTime;
-        this.arrivalTime = arrivalTime;
-    }
-}
-
 public class Scheduler {
 
     public static void scheduleSPT(List<Job> jobs) {
