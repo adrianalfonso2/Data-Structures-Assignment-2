@@ -16,9 +16,7 @@ class Job {
         this.arrivalTime = arrivalTime;
     }
 }
-
 public class JobScheduler {
-
     public static void main(String[] args) throws IOException {
         String task1Path = "task1-input.txt";
         String task2Path = "task2-input.txt";
@@ -55,51 +53,51 @@ public class JobScheduler {
 
     public static void scheduleSPT(List<Job> jobs) {
         jobs.sort(Comparator.comparingInt(job -> job.processingTime));
-
+    
         int currentTime = 0;
         double totalCompletionTime = 0;
         List<Integer> executionOrder = new ArrayList<>();
-
+    
         for (Job job : jobs) {
             currentTime += job.processingTime;
             totalCompletionTime += currentTime;
             executionOrder.add(job.id);
         }
-
-        double averageCompletionTime = totalCompletionTime / jobs.size();
+    
+        double averageCompletionTime =  totalCompletionTime / jobs.size();
         System.out.println("Execution order: " + executionOrder);
-        System.out.printf("Average completion time: %.2f\n", averageCompletionTime);
+        System.out.printf("Average completion time: %.1f\n", averageCompletionTime);
     }
-
+    
     public static void schedulePrioritySPT(List<Job> jobs) {
         List<Job> priorityJobs = new ArrayList<>(jobs);
         priorityJobs.sort(Comparator.comparing((Job job) -> job.priority)
                 .thenComparingInt(job -> job.processingTime));
-
+    
         int currentTime = 0;
         double totalCompletionTime = 0;
         List<Integer> executionOrder = new ArrayList<>();
-
+    
         for (Job job : priorityJobs) {
             currentTime += job.processingTime;
             totalCompletionTime += currentTime;
             executionOrder.add(job.id);
         }
-
-        double averageCompletionTime = totalCompletionTime / priorityJobs.size();
+    
+        double averageCompletionTime = totalCompletionTime / jobs.size();
         System.out.println("Execution order: " + executionOrder);
-        System.out.printf("Average completion time: %.2f\n", averageCompletionTime);
+        System.out.printf("Average completion time: %.1f\n", averageCompletionTime);
     }
-
+    
     public static void scheduleArrivalSPT(List<Job> jobs) {
         PriorityQueue<Job> jobQueue = new PriorityQueue<>(Comparator
                 .comparing((Job job) -> job.arrivalTime)
                 .thenComparingInt(job -> job.processingTime));
-
+    
         int currentTime = 0;
         double totalCompletionTime = 0;
         List<Integer> executionOrder = new ArrayList<>();
-
+    
         jobQueue.addAll(jobs);
         while (!jobQueue.isEmpty()) {
             Job job = jobQueue.poll();
@@ -107,9 +105,9 @@ public class JobScheduler {
             totalCompletionTime += currentTime;
             executionOrder.add(job.id);
         }
-
+    
         double averageCompletionTime = totalCompletionTime / jobs.size();
         System.out.println("Execution order: " + executionOrder);
-        System.out.printf("Average completion time: %.2f\n", averageCompletionTime);
+        System.out.printf("Average completion time: %.1f\n", averageCompletionTime);
     }
 }
